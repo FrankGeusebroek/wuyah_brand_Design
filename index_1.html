@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wuyah · Brand Design · Visuele Gids</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   WUYAH DESIGN TOKENS · Brand Design v1.0
+═══════════════════════════════════════ */
+:root {
+  --sky-light: #B8D4F0;
+  --sky-mid: #8FBCE8;
+  --sky-deep: #5A9AD4;
+  --sky-ink: #2E6FA8;
+
+  --rose: #F4A8C0;
+  --rose-deep: #EF7FA4;
+  --orange: #F9C07A;
+  --orange-deep: #F4A040;
+  --peach: #FAD8C0;
+
+  --ink: #0D1F3C;
+  --ink-mid: #1E3A5F;
+  --ink-muted: #4A6A8A;
+  --white: #FDFCFF;
+
+  --grad-heaven: linear-gradient(160deg, #B8D4F0 0%, #C8DEFA 20%, #E8C8DC 55%, #F9D4A0 85%, #FAE0B0 100%);
+  --grad-power: linear-gradient(135deg, #5A9AD4 0%, #EF7FA4 60%, #F4A040 100%);
+  --grad-identity: linear-gradient(135deg, #2E6FA8 0%, #EF7FA4 100%);
+
+  --glass-light-bg: rgba(255,255,255,0.25);
+  --glass-light-border: rgba(255,255,255,0.50);
+  --glass-deep-bg: rgba(255,255,255,0.35);
+  --glass-deep-border: rgba(255,255,255,0.60);
+  --glass-dark-bg: rgba(13,31,60,0.60);
+  --glass-dark-border: rgba(255,255,255,0.12);
+
+  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #0D1F3C;
+  color: var(--ink);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══════════════════════════
+   AMBIENT BACKGROUND SYSTEM
+═══════════════════════════ */
+.ambient-bg {
+  position: fixed;
+  inset: 0;
+  background: var(--grad-heaven);
+  z-index: 0;
+  overflow: hidden;
+}
+.ambient-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  z-index: 1;
+}
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  animation: orbFloat 12s ease-in-out infinite;
+  pointer-events: none;
+}
+.orb-sky    { width: 520px; height: 520px; top: -120px; left: -120px; background: radial-gradient(circle, rgba(184,212,240,0.55), transparent 70%); animation-duration: 12s; }
+.orb-rose   { width: 420px; height: 420px; top: 38%; right: -140px; background: radial-gradient(circle, rgba(239,127,164,0.35), transparent 70%); animation-duration: 14s; animation-delay: -4s; }
+.orb-orange { width: 360px; height: 360px; bottom: -80px; left: 18%; background: radial-gradient(circle, rgba(249,192,122,0.40), transparent 70%); animation-duration: 11s; animation-delay: -7s; }
+
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0, 0); }
+  33%      { transform: translate(14px, -20px); }
+  66%      { transform: translate(-10px, 12px); }
+}
+
+/* ═══════════════════════════
+   LAYOUT SHELL
+═══════════════════════════ */
+.shell {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  padding: 64px 24px 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.wrap { width: 100%; max-width: 1000px; }
+
+/* Cover */
+.cover { text-align: center; margin-bottom: 24px; }
+.cover-eyebrow {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--ink-muted); margin-bottom: 18px;
+}
+.cover-title {
+  font-size: clamp(40px, 8vw, 68px); font-weight: 700; letter-spacing: -0.035em;
+  line-height: 1.0;
+  background: var(--grad-identity);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  margin-bottom: 20px;
+}
+.cover-sub {
+  font-size: clamp(15px, 2.4vw, 19px); font-weight: 300; color: var(--ink-mid);
+  line-height: 1.7; max-width: 580px; margin: 0 auto;
+}
+.cover-meta {
+  margin-top: 28px; font-size: 11px; font-weight: 400; letter-spacing: 0.04em;
+  color: var(--ink-muted);
+}
+
+/* Phase headers */
+.phase-header {
+  width: 100%; margin: 76px 0 28px; display: flex; align-items: center; gap: 16px;
+}
+.phase-num {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--sky-deep); background: var(--glass-light-bg);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border: 0.5px solid var(--glass-light-border);
+  border-radius: 20px; padding: 6px 15px; white-space: nowrap;
+}
+.phase-title { font-size: 22px; font-weight: 700; letter-spacing: -0.025em; color: var(--ink); }
+.phase-line { flex: 1; height: 0.5px; background: linear-gradient(90deg, rgba(13,31,60,0.18), transparent); }
+
+.lead {
+  font-size: 15px; font-weight: 300; color: var(--ink-mid); line-height: 1.7;
+  max-width: 680px; margin-bottom: 28px;
+}
+.lead strong { font-weight: 600; color: var(--ink); }
+
+/* Glass card base */
+.card {
+  background: var(--glass-light-bg);
+  backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+  border: 0.5px solid var(--glass-light-border);
+  border-radius: 24px; padding: 28px;
+}
+.card-deep {
+  background: var(--glass-deep-bg);
+  backdrop-filter: blur(32px); -webkit-backdrop-filter: blur(32px);
+  border: 0.5px solid var(--glass-deep-border);
+  border-radius: 28px;
+}
+.grid { display: grid; gap: 18px; }
+.g2 { grid-template-columns: repeat(2, 1fr); }
+.g3 { grid-template-columns: repeat(3, 1fr); }
+.g4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 760px) { .g2, .g3, .g4 { grid-template-columns: 1fr; } }
+
+.eyebrow {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--sky-deep); margin-bottom: 8px;
+}
+.note { font-size: 12.5px; font-weight: 300; color: var(--ink-muted); line-height: 1.6; }
+
+/* Pull quote */
+.pull {
+  margin: 8px 0 0; padding: 30px 34px; border-radius: 24px;
+  background: var(--glass-deep-bg);
+  backdrop-filter: blur(32px); -webkit-backdrop-filter: blur(32px);
+  border: 0.5px solid var(--glass-deep-border);
+  border-left: 3px solid transparent;
+  border-image: var(--grad-power) 1;
+  border-image-slice: 0 0 0 1;
+}
+.pull p {
+  font-size: clamp(18px, 3vw, 24px); font-weight: 700; letter-spacing: -0.02em;
+  line-height: 1.35; color: var(--ink);
+}
+.pull p.grad {
+  background: var(--grad-power);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+
+/* ═══════════════════════════
+   01 TENSION
+═══════════════════════════ */
+.tension { display: grid; grid-template-columns: 1fr auto 1fr; gap: 0; align-items: stretch; }
+@media (max-width: 760px) { .tension { grid-template-columns: 1fr; } }
+.tension-pole { padding: 30px; }
+.tension-pole .eyebrow { margin-bottom: 14px; }
+.tension-pole h4 { font-size: 17px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
+.tension-pole p { font-size: 13px; font-weight: 300; color: var(--ink-mid); line-height: 1.65; }
+.tension-divider {
+  width: 0.5px; background: linear-gradient(180deg, transparent, rgba(13,31,60,0.18), transparent);
+}
+@media (max-width: 760px) { .tension-divider { width: 100%; height: 0.5px; } }
+.brand-row { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 16px; }
+.chip {
+  font-size: 10.5px; font-weight: 600; letter-spacing: 0.04em;
+  padding: 4px 11px; border-radius: 20px;
+  background: rgba(255,255,255,0.35); border: 0.5px solid rgba(255,255,255,0.55);
+  color: var(--ink-mid);
+}
+
+/* ═══════════════════════════
+   02 TYPOGRAPHY
+═══════════════════════════ */
+.type-row {
+  display: flex; align-items: baseline; gap: 20px; padding: 18px 0;
+  border-bottom: 0.5px solid rgba(13,31,60,0.08);
+}
+.type-row:last-child { border-bottom: none; }
+.type-meta { width: 160px; flex-shrink: 0; }
+.type-meta .w { font-size: 13px; font-weight: 600; color: var(--ink); }
+.type-meta .u { font-size: 11px; font-weight: 300; color: var(--ink-muted); line-height: 1.45; margin-top: 2px; }
+.type-sample { flex: 1; color: var(--ink); }
+.s700 { font-weight: 700; font-size: 28px; letter-spacing: -0.03em; }
+.s600 { font-weight: 600; font-size: 19px; letter-spacing: -0.01em; }
+.s400 { font-weight: 400; font-size: 15px; }
+.s300 { font-weight: 300; font-size: 15px; color: var(--ink-mid); }
+.s-label { font-weight: 600; font-size: 10px; letter-spacing: 0.20em; text-transform: uppercase; color: var(--ink-muted); }
+.type-grad {
+  font-weight: 700; font-size: 30px; letter-spacing: -0.03em;
+  background: var(--grad-identity);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+
+/* ═══════════════════════════
+   03 COLOR
+═══════════════════════════ */
+.sw { border-radius: 18px; overflow: hidden; border: 0.5px solid rgba(255,255,255,0.4); }
+.sw-chip { height: 88px; }
+.sw-body { padding: 12px 14px; background: rgba(255,255,255,0.28); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+.sw-name { font-size: 13px; font-weight: 600; color: var(--ink); }
+.sw-hex { font-size: 11px; font-weight: 400; color: var(--ink-muted); letter-spacing: 0.03em; margin-top: 1px; }
+.sw-role { font-size: 11px; font-weight: 300; color: var(--ink-mid); line-height: 1.45; margin-top: 6px; }
+
+.temp-scale { margin-top: 6px; }
+.temp-bar { height: 14px; border-radius: 10px; background: linear-gradient(90deg, var(--sky-light) 0%, var(--sky-mid) 22%, var(--peach) 50%, var(--orange) 76%, var(--orange-deep) 100%); }
+.temp-labels { display: flex; justify-content: space-between; margin-top: 18px; gap: 8px; }
+.temp-item { flex: 1; text-align: center; }
+.temp-item .m { font-size: 11.5px; font-weight: 600; color: var(--ink); }
+.temp-item .t { font-size: 10px; font-weight: 300; color: var(--ink-muted); margin-top: 3px; line-height: 1.4; }
+@media (max-width: 760px) { .temp-labels { flex-direction: column; gap: 10px; } .temp-item { text-align: left; } }
+
+/* ═══════════════════════════
+   04 GLASS
+═══════════════════════════ */
+.glass-demo { padding: 36px; border-radius: 28px; position: relative; overflow: hidden; }
+.glass-demo-bg { position: absolute; inset: 0; background: var(--grad-power); opacity: 0.85; }
+.glass-stack { position: relative; display: flex; flex-direction: column; gap: 14px; }
+.gl {
+  padding: 16px 20px; border-radius: 22px;
+}
+.gl-light { background: rgba(255,255,255,0.25); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 0.5px solid rgba(255,255,255,0.50); }
+.gl-deep  { background: rgba(255,255,255,0.36); backdrop-filter: blur(32px); -webkit-backdrop-filter: blur(32px); border: 0.5px solid rgba(255,255,255,0.62); }
+.gl-dark  { background: rgba(13,31,60,0.60); backdrop-filter: blur(32px); -webkit-backdrop-filter: blur(32px); border: 0.5px solid rgba(255,255,255,0.14); color: var(--white); }
+.gl .gn { font-size: 13px; font-weight: 600; }
+.gl-light .gn, .gl-deep .gn { color: var(--ink); }
+.gl .gs { font-size: 11px; font-weight: 300; margin-top: 2px; }
+.gl-light .gs, .gl-deep .gs { color: var(--ink-mid); }
+.gl-dark .gs { color: rgba(253,252,255,0.7); }
+.code {
+  font-family: 'SF Mono', ui-monospace, 'Cascadia Code', monospace;
+  font-size: 11px; color: var(--ink-mid); line-height: 1.7;
+  background: rgba(255,255,255,0.30); border: 0.5px solid rgba(255,255,255,0.45);
+  border-radius: 16px; padding: 16px 18px; margin-top: 14px; white-space: pre; overflow-x: auto;
+}
+
+/* ═══════════════════════════
+   05 GRADIENTS
+═══════════════════════════ */
+.grad-card { border-radius: 22px; overflow: hidden; border: 0.5px solid rgba(255,255,255,0.4); }
+.grad-chip { height: 110px; }
+.grad-heaven { background: var(--grad-heaven); }
+.grad-power { background: var(--grad-power); }
+.grad-identity { background: var(--grad-identity); }
+.grad-body { padding: 14px 16px; background: rgba(255,255,255,0.28); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+.grad-name { font-size: 13.5px; font-weight: 600; color: var(--ink); }
+.grad-angle { font-family: 'SF Mono', ui-monospace, monospace; font-size: 10.5px; color: var(--ink-muted); margin-top: 3px; }
+.grad-role { font-size: 11px; font-weight: 300; color: var(--ink-mid); line-height: 1.45; margin-top: 7px; }
+
+/* ═══════════════════════════
+   06/07 MOTION
+═══════════════════════════ */
+.spring-box {
+  display: flex; align-items: center; gap: 22px; flex-wrap: wrap;
+}
+.spring-dot {
+  width: 54px; height: 54px; border-radius: 18px; background: var(--grad-power);
+  box-shadow: 0 8px 28px rgba(90,154,212,0.30);
+  animation: springMove 2.4s var(--spring) infinite;
+}
+@keyframes springMove {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(120px); }
+}
+.curve-code { font-family: 'SF Mono', ui-monospace, monospace; font-size: 12px; color: var(--ink); }
+.motion-table { width: 100%; border-collapse: collapse; }
+.motion-table th { text-align: left; font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted); padding: 0 0 12px; }
+.motion-table td { font-size: 13px; font-weight: 300; color: var(--ink-mid); padding: 11px 14px 11px 0; border-top: 0.5px solid rgba(13,31,60,0.08); vertical-align: top; }
+.motion-table td:first-child { font-weight: 600; color: var(--ink); white-space: nowrap; }
+.motion-table td .mono { font-family: 'SF Mono', ui-monospace, monospace; font-size: 11.5px; color: var(--sky-ink); }
+.dur { font-size: 11px; font-weight: 600; color: var(--sky-deep); white-space: nowrap; }
+
+/* ═══════════════════════════
+   08 ICONS
+═══════════════════════════ */
+.icon-cell {
+  display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px;
+  padding: 24px 14px;
+}
+.icon-art {
+  width: 64px; height: 64px; display: flex; align-items: center; justify-content: center;
+  border-radius: 20px; background: rgba(255,255,255,0.30); border: 0.5px solid rgba(255,255,255,0.5);
+}
+.icon-art svg { width: 38px; height: 38px; }
+.icon-name { font-size: 13px; font-weight: 600; color: var(--ink); }
+.icon-concept { font-size: 11px; font-weight: 300; color: var(--ink-muted); line-height: 1.4; }
+.ic { fill: none; stroke: var(--sky-ink); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ═══════════════════════════
+   09 COMPONENTS
+═══════════════════════════ */
+.btn-primary {
+  background: var(--grad-power); border: none; border-radius: 28px;
+  padding: 13px 32px; font-family: 'Poppins'; font-weight: 700; font-size: 14px;
+  letter-spacing: -0.01em; color: var(--white); cursor: pointer;
+  box-shadow: 0 8px 28px rgba(90,154,212,0.30);
+  transition: transform 0.2s var(--spring), box-shadow 0.2s var(--spring);
+}
+.btn-primary:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 14px 40px rgba(90,154,212,0.42); }
+.btn-primary:active { transform: scale(0.94); }
+.btn-secondary {
+  background: rgba(255,255,255,0.25); border: 0.5px solid rgba(255,255,255,0.50);
+  border-radius: 28px; padding: 11px 26px; font-family: 'Poppins'; font-weight: 600; font-size: 13px;
+  color: var(--ink); cursor: pointer; transition: all 0.2s var(--spring);
+}
+.btn-secondary:hover { background: rgba(255,255,255,0.40); transform: scale(1.03); }
+.btn-dark {
+  background: linear-gradient(135deg, rgba(90,154,212,0.85), rgba(90,154,212,0.55));
+  border: 0.5px solid rgba(255,255,255,0.20); border-radius: 28px;
+  padding: 9px 22px; font-family: 'Poppins'; font-weight: 600; font-size: 12px; color: var(--white);
+  cursor: pointer; box-shadow: 0 4px 16px rgba(90,154,212,0.30); transition: all 0.2s var(--spring);
+}
+.btn-dark:hover { transform: scale(1.04); }
+.btn-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+
+.input-field {
+  width: 100%; background: rgba(255,255,255,0.30); border: 0.5px solid rgba(255,255,255,0.50);
+  border-radius: 28px; padding: 12px 18px; font-family: 'Poppins'; font-weight: 300; font-size: 13px;
+  color: var(--ink); outline: none; transition: all 0.2s var(--ease);
+}
+.input-field::placeholder { color: var(--ink-muted); }
+.input-field:focus { background: rgba(255,255,255,0.46); border-color: rgba(90,154,212,0.55); }
+
+.training-card {
+  position: relative; overflow: hidden; border-radius: 24px; padding: 26px;
+  background: rgba(13,31,60,0.78); border: 0.5px solid rgba(255,255,255,0.12); color: var(--white);
+}
+.training-card .rg { position: absolute; border-radius: 50%; filter: blur(50px); }
+.rg1 { width: 200px; height: 200px; top: -60px; right: -40px; background: radial-gradient(circle, rgba(90,154,212,0.55), transparent 70%); }
+.rg2 { width: 180px; height: 180px; bottom: -70px; left: -30px; background: radial-gradient(circle, rgba(239,127,164,0.40), transparent 70%); }
+.rg3 { width: 150px; height: 150px; bottom: 10px; right: 30px; background: radial-gradient(circle, rgba(249,192,122,0.30), transparent 70%); }
+.training-card .tc-content { position: relative; }
+.tc-eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(184,212,240,0.85); margin-bottom: 10px; }
+.tc-title { font-size: 22px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 6px; }
+.tc-sub { font-size: 13px; font-weight: 300; color: rgba(253,252,255,0.72); line-height: 1.6; margin-bottom: 20px; }
+
+.sofia-bubble {
+  background: rgba(255,255,255,0.25); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+  border: 0.5px solid rgba(255,255,255,0.50);
+  border-radius: 20px 20px 20px 5px; padding: 16px 20px; max-width: 420px;
+  font-size: 14px; font-weight: 300; color: var(--ink); line-height: 1.6;
+}
+
+.streak-row { display: flex; align-items: flex-end; gap: 8px; height: 60px; }
+.bar { width: 26px; border-radius: 10px; transition: all 0.25s var(--spring); }
+.bar-done { background: linear-gradient(180deg, var(--sky-mid), var(--sky-light)); }
+.bar-today { background: linear-gradient(180deg, var(--rose-deep), var(--orange-deep)); animation: todayPulse 2.5s var(--ease) infinite; }
+.bar-miss { background: rgba(13,31,60,0.08); }
+.streak-row:hover .bar { transform: scaleY(1.0); }
+@keyframes todayPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239,127,164,0.0); }
+  50% { box-shadow: 0 0 0 5px rgba(239,127,164,0.22); }
+}
+
+/* ═══════════════════════════
+   10 SOFIA
+═══════════════════════════ */
+.sofia-stage { display: flex; align-items: center; gap: 26px; flex-wrap: wrap; }
+.sofia-avatar-wrap { position: relative; width: 92px; height: 92px; flex-shrink: 0; }
+.sofia-ring {
+  position: absolute; inset: -5px; border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--sky-mid), var(--rose-deep), var(--orange), var(--sky-mid));
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 4px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 4px));
+  animation: sofiaRing 6s linear infinite;
+}
+@keyframes sofiaRing { to { transform: rotate(360deg); } }
+.sofia-avatar {
+  position: absolute; inset: 0; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, var(--sky-mid), #B59DDB 45%, var(--rose-deep) 100%);
+  display: flex; align-items: center; justify-content: center;
+}
+.sofia-avatar svg { width: 44px; height: 44px; }
+.sofia-glief { fill: none; stroke: var(--white); stroke-width: 1.8; stroke-linecap: round; }
+.sofia-status {
+  position: absolute; bottom: 4px; right: 4px; width: 16px; height: 16px; border-radius: 50%;
+  background: radial-gradient(circle, #6ED9A0, #3DC477); border: 2px solid rgba(255,255,255,0.6);
+  animation: sofiaStatus 3s var(--ease) infinite;
+}
+@keyframes sofiaStatus {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(61,196,119,0.0); }
+  50% { box-shadow: 0 0 0 6px rgba(61,196,119,0.20); }
+}
+
+/* ═══════════════════════════
+   12 EMPTY / LOADING
+═══════════════════════════ */
+.empty-state { text-align: center; padding: 44px 28px; }
+.sunrise-symbol { width: 84px; height: 84px; margin: 0 auto 20px; }
+.empty-title { font-size: 28px; font-weight: 700; letter-spacing: -0.03em; color: var(--ink); margin-bottom: 8px; }
+.empty-sub { font-size: 14px; font-weight: 300; color: var(--ink-muted); line-height: 1.6; margin-bottom: 22px; }
+
+.loading-state { text-align: center; padding: 44px 28px; }
+.load-orbs { display: flex; justify-content: center; gap: 12px; margin-bottom: 18px; }
+.load-orb { width: 16px; height: 16px; border-radius: 50%; animation: loadPulse 1.8s var(--ease) infinite; }
+.lo1 { background: var(--sky-mid); animation-delay: 0s; }
+.lo2 { background: var(--rose-deep); animation-delay: 0.2s; }
+.lo3 { background: var(--orange-deep); animation-delay: 0.4s; }
+@keyframes loadPulse { 0%, 100% { opacity: 0.3; transform: scale(0.85); } 50% { opacity: 1; transform: scale(1.1); } }
+.load-text { font-size: 11px; font-weight: 300; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); }
+
+/* ═══════════════════════════
+   13 NOTIFICATIONS
+═══════════════════════════ */
+.notif {
+  display: flex; gap: 13px; align-items: flex-start; padding: 15px 18px; border-radius: 18px;
+  background: rgba(255,255,255,0.30); border: 0.5px solid rgba(255,255,255,0.5);
+}
+.notif-icon { width: 36px; height: 36px; border-radius: 11px; flex-shrink: 0; background: radial-gradient(circle at 35% 30%, var(--sky-mid), var(--rose-deep)); display: flex; align-items: center; justify-content: center; }
+.notif-icon svg { width: 20px; height: 20px; }
+.notif-body .nh { font-size: 12px; font-weight: 600; color: var(--ink); }
+.notif-body .nt { font-size: 13px; font-weight: 300; color: var(--ink-mid); line-height: 1.5; margin-top: 2px; }
+.notif-bad { background: rgba(244,160,64,0.10); border-color: rgba(244,64,64,0.18); }
+
+/* Do / Dont */
+.dd { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+@media (max-width: 760px) { .dd { grid-template-columns: 1fr; } }
+.dd-col { padding: 24px; border-radius: 22px; }
+.dd-do { background: rgba(110,217,160,0.12); border: 0.5px solid rgba(61,196,119,0.30); }
+.dd-no { background: rgba(13,31,60,0.05); border: 0.5px solid rgba(13,31,60,0.10); }
+.dd-h { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 14px; }
+.dd-do .dd-h { color: #2E9E63; }
+.dd-no .dd-h { color: var(--ink-muted); }
+.dd-list { list-style: none; }
+.dd-list li { font-size: 13px; font-weight: 300; color: var(--ink-mid); line-height: 1.55; padding: 7px 0 7px 22px; position: relative; }
+.dd-list li::before { position: absolute; left: 0; top: 7px; font-size: 13px; }
+.dd-do .dd-list li::before { content: '↗'; color: #3DC477; }
+.dd-no .dd-list li::before { content: '×'; color: var(--ink-muted); font-weight: 600; }
+
+/* Filter */
+.filter-step {
+  display: flex; gap: 18px; align-items: flex-start; padding: 18px 0;
+  border-bottom: 0.5px solid rgba(13,31,60,0.08);
+}
+.filter-step:last-child { border-bottom: none; }
+.filter-num {
+  width: 30px; height: 30px; flex-shrink: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700; color: var(--white); background: var(--grad-power);
+}
+.filter-q { font-size: 15px; font-weight: 600; color: var(--ink); line-height: 1.4; }
+.filter-final {
+  margin-top: 22px; padding: 22px 26px; border-radius: 20px; background: rgba(13,31,60,0.85); color: var(--white);
+}
+.filter-final p { font-size: 14px; font-weight: 300; line-height: 1.6; }
+.filter-final p strong { font-weight: 700; }
+.filter-final p.y { color: #8FE0B5; }
+
+/* Footer */
+.footer { text-align: center; margin-top: 90px; padding-top: 32px; border-top: 0.5px solid rgba(13,31,60,0.10); }
+.footer .fw { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; background: var(--grad-identity); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 10px; }
+.footer .fm { font-size: 11.5px; font-weight: 300; color: var(--ink-muted); line-height: 1.7; }
+
+.section-intro { margin-bottom: 22px; }
+.hr-soft { height: 0.5px; background: rgba(13,31,60,0.08); margin: 22px 0; border: none; }
+</style>
+</head>
+<body>
+
+<div class="ambient-bg">
+  <div class="orb orb-sky"></div>
+  <div class="orb orb-rose"></div>
+  <div class="orb orb-orange"></div>
+</div>
+
+<div class="shell">
+<div class="wrap">
+
+  <!-- COVER -->
+  <header class="cover">
+    <div class="cover-eyebrow">Brand Design · Visuele Gids · v1.0</div>
+    <h1 class="cover-title">Wuyah</h1>
+    <p class="cover-sub">De visuele wet van Wuyah, levend en zichtbaar. Elke kleur, letter, beweging en component op deze pagina is een werkend voorbeeld, geen beschrijving. Dit is de basis voor iedereen die meebouwt aan een wereldklasse merk.</p>
+    <div class="cover-meta">Art Direction: Luna · Product Architecture: Nova · Mei 2026</div>
+  </header>
+
+  <div class="pull">
+    <p class="grad">Rust in het dagelijks gebruik. Kracht op het moment van progressie.</p>
+  </div>
+
+  <!-- 01 AMBITIE -->
+  <div class="phase-header">
+    <span class="phase-num">01</span>
+    <span class="phase-title">Merk-ambitie</span>
+    <span class="phase-line"></span>
+  </div>
+  <p class="lead">Wuyah heeft de uitstraling van <strong>twee categoriedefiniërende merken tegelijk</strong>. Niet afwisselend, maar gelijktijdig. Dat levert één centrale spanningsboog op die door elk ontwerp loopt.</p>
+
+  <div class="card-deep">
+    <div class="tension">
+      <div class="tension-pole">
+        <div class="eyebrow">Het gevoel van een top-tech-merk</div>
+        <h4>Precies, intelligent, clean</h4>
+        <p>Snel en vertrouwd. De kwaliteit van Apple, de helderheid van Linear, de autoriteit van OpenAI.</p>
+        <div class="brand-row">
+          <span class="chip">Apple</span><span class="chip">Linear</span><span class="chip">OpenAI</span>
+        </div>
+      </div>
+      <div class="tension-divider"></div>
+      <div class="tension-pole">
+        <div class="eyebrow">Het gevoel van een top-sportmerk</div>
+        <h4>Krachtig, progressiegericht, menselijk</h4>
+        <p>Gemotiveerd en fysiek voelbaar. De energie van Nike Training, de data-esthetiek van Whoop, de discipline van Garmin.</p>
+        <div class="brand-row">
+          <span class="chip">Nike Training</span><span class="chip">Whoop</span><span class="chip">Garmin</span>
+        </div>
+      </div>
+    </div>
+    <hr class="hr-soft">
+    <p class="note">Kalm bij het openen van de app. Krachtig bij het voltooien van een sessie. Stil bij de check-in. Energiek bij dag 66. Dit zijn geen twee modi, maar gradaties van dezelfde taal. De dagelijkse loop moet frictionloos aanvoelen om retentie te bouwen, terwijl progressiemomenten een kracht verdienen die de gebruiker fysiek iets laat voelen.</p>
+  </div>
+
+  <!-- 02 TYPOGRAFIE -->
+  <div class="phase-header">
+    <span class="phase-num">02</span>
+    <span class="phase-title">Typografie</span>
+    <span class="phase-line"></span>
+  </div>
+  <p class="lead"><strong>Poppins is het lettertype van Wuyah. Er is geen alternatief.</strong> Het is de enige familie die de warmte van een menselijk merk en de precisie van een tech-merk tegelijk draagt. Geometrisch genoeg voor autoriteit, rond genoeg voor vertrouwen.</p>
+
+  <div class="card">
+    <div class="type-row">
+      <div class="type-meta"><div class="w">Poppins 700</div><div class="u">Logo, display-titels, mijlpalen</div></div>
+      <div class="type-sample s700">Vandaag train je je geest</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta"><div class="w">Poppins 600</div><div class="u">Sectie-titels, card-headers, CTA</div></div>
+      <div class="type-sample s600">Hoe voel je je vanochtend?</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta"><div class="w">Poppins 400</div><div class="u">Navigatie, labels, UI-elementen</div></div>
+      <div class="type-sample s400">Start je sessie van vandaag</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta"><div class="w">Poppins 300</div><div class="u">Body, Sofia-berichten, subtitels</div></div>
+      <div class="type-sample s300">Sommige dagen zijn zwaarder dan andere. Dat betekent niet dat de training stopt met werken.</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta"><div class="w">Label · 0.20em</div><div class="u">Uppercase, metadata, timestamps</div></div>
+      <div class="type-sample s-label">Dag 18 · Sofia ziet het verschil</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta"><div class="w">Gradient display</div><div class="u">Alleen op 700, nooit op body of labels</div></div>
+      <div class="type-sample type-grad">Dag 66 voltooid</div>
+    </div>
+  </div>
+
+  <div class="grid g2" style="margin-top:18px;">
+    <div class="card">
+      <div class="eyebrow">Signatuur · Letterafstand</div>
+      <p class="note">Uppercase labels krijgen altijd <strong style="color:var(--ink)">letter-spacing 0.16 tot 0.22em</strong>. Geen enkel ander element krijgt dit tracking-niveau, waardoor labels onmiddellijk herkenbaar zijn als Wuyah-interface.</p>
+    </div>
+    <div class="card">
+      <div class="eyebrow">Signatuur · Negatieve tracking</div>
+      <p class="note">Display-titels krijgen <strong style="color:var(--ink)">letter-spacing -0.025 tot -0.035em</strong>. Negatieve tracking op bold Poppins creëert de compacte kracht van een sportmerk zonder aan leesbaarheid in te leveren.</p>
+    </div>
+  </div>
+
+  <!-- 03 KLEUR -->
+  <div class="phase-header">
+    <span class="phase-num">03</span>
+    <span class="phase-title">Kleurensysteem</span>
+    <span class="phase-line"></span>
+  </div>
+  <p class="lead">Het kleurensysteem is gebaseerd op de <strong>zonsopgang</strong>: het moment waarop een nieuwe dag begint en mensen het meest open staan voor verandering. Lichtblauw is dominant omdat de ochtendhemel dominant is. Roze en oranje zijn de horizonkleuren: emotioneel geladen, zichtbaar maar niet overweldigend.</p>
+
+  <div class="eyebrow" style="margin-bottom:14px;">Sky · de dominante familie</div>
+  <div class="grid g4">
+    <div class="sw"><div class="sw-chip" style="background:#B8D4F0"></div><div class="sw-body"><div class="sw-name">Sky Light</div><div class="sw-hex">#B8D4F0</div><div class="sw-role">Achtergrond dominant, kalmte, ruimte</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:#8FBCE8"></div><div class="sw-body"><div class="sw-name">Sky Mid</div><div class="sw-hex">#8FBCE8</div><div class="sw-role">Interactieve elementen, accenten</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:#5A9AD4"></div><div class="sw-body"><div class="sw-name">Sky Deep</div><div class="sw-hex">#5A9AD4</div><div class="sw-role">Primaire actieknoppen, sterke accenten</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:#2E6FA8"></div><div class="sw-body"><div class="sw-name">Sky Ink</div><div class="sw-hex">#2E6FA8</div><div class="sw-role">Gradient-eindpunt, tekst op licht</div></div></div>
+  </div>
+
+  <div class="eyebrow" style="margin:28px 0 14px;">Sunrise · de ondersteunende familie</div>
+  <div class="grid g4">
+    <div class="sw"><div class="sw-chip" style="background:#F4A8C0"></div><div class="sw-body"><div class="sw-name">Sunrise Rose</div><div class="sw-hex">#F4A8C0</div><div class="sw-role">Zachte emotionele accenten</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:#EF7FA4"></div><div class="sw-body"><div class="sw-name">Rose Deep</div><div class="sw-hex">#EF7FA4</div><div class="sw-role">Sofia-momenten, emotionele highlights</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:#F9C07A"></div><div class="sw-body"><div class="sw-name">Sunrise Orange</div><div class="sw-hex">#F9C07A</div><div class="sw-role">Energie, warmte, streak-momenten</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:#F4A040"></div><div class="sw-body"><div class="sw-name">Orange Deep</div><div class="sw-hex">#F4A040</div><div class="sw-role">Mijlpaalaccenten, progressie-energie</div></div></div>
+  </div>
+  <div class="grid g4" style="margin-top:18px;">
+    <div class="sw"><div class="sw-chip" style="background:#FAD8C0"></div><div class="sw-body"><div class="sw-name">Peach</div><div class="sw-hex">#FAD8C0</div><div class="sw-role">Achtergrondvlakken, kaartoppervlakken</div></div></div>
+  </div>
+
+  <div class="eyebrow" style="margin:28px 0 14px;">Ink · de neutralen</div>
+  <div class="grid g4">
+    <div class="sw"><div class="sw-chip" style="background:#0D1F3C"></div><div class="sw-body"><div class="sw-name">Ink</div><div class="sw-hex">#0D1F3C</div><div class="sw-role">Primaire tekst, diepe achtergronden</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:#1E3A5F"></div><div class="sw-body"><div class="sw-name">Ink Mid</div><div class="sw-hex">#1E3A5F</div><div class="sw-role">Secundaire tekst op donker</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:#4A6A8A"></div><div class="sw-body"><div class="sw-name">Ink Muted</div><div class="sw-hex">#4A6A8A</div><div class="sw-role">Metadata, labels, timestamps</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:#FDFCFF; border:0.5px solid rgba(13,31,60,0.1)"></div><div class="sw-body"><div class="sw-name">White</div><div class="sw-hex">#FDFCFF</div><div class="sw-role">Tekst op donker, lichte oppervlakken</div></div></div>
+  </div>
+
+  <div class="card" style="margin-top:28px;">
+    <div class="eyebrow">Kleurtemperatuur per moment</div>
+    <p class="note" style="margin-bottom:20px;">De interface beweegt van koud naar warm naarmate de gebruiker dichter bij progressie komt. Koud bij het openen, vol warm bij de mijlpaal. Gradients lopen nooit omgekeerd.</p>
+    <div class="temp-scale">
+      <div class="temp-bar"></div>
+      <div class="temp-labels">
+        <div class="temp-item"><div class="m">Openen</div><div class="t">Koud naar warm · Sky Light, peach</div></div>
+        <div class="temp-item"><div class="m">Check-in</div><div class="t">Neutraal · Sky Mid, wit</div></div>
+        <div class="temp-item"><div class="m">Training</div><div class="t">Warm · Ink met Sky/Rose accenten</div></div>
+        <div class="temp-item"><div class="m">Voltooid</div><div class="t">Vol warm · Orange Deep, Rose Deep</div></div>
+        <div class="temp-item"><div class="m">Dag 66</div><div class="t">Maximaal warm · volle sunrise gradient</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 GLAS -->
+  <div class="phase-header">
+    <span class="phase-num">04</span>
+    <span class="phase-title">Glasmorfisme</span>
+    <span class="phase-line"></span>
+  </div>
+  <p class="lead">Glasmorfisme is de handtekening van Wuyah. Niet als trend, maar als structureel principe: <strong>de interface is nooit dicht</strong>. Er is altijd licht en diepte doorheen zichtbaar. Dit versterkt de associatie met openheid, transparantie en vertrouwen. Glas werkt alleen als er iets achter zit, daarom is de ambient achtergrond altijd het fundament.</p>
+
+  <div class="grid g2">
+    <div class="glass-demo">
+      <div class="glass-demo-bg"></div>
+      <div class="glass-stack">
+        <div class="gl gl-light"><div class="gn">Glas Licht</div><div class="gs">Cards en containers op lichte achtergrond</div></div>
+        <div class="gl gl-deep"><div class="gn">Glas Diep</div><div class="gs">Premium containers, Sofia-omgeving, speciale momenten</div></div>
+        <div class="gl gl-dark"><div class="gn">Glas Donker</div><div class="gs">Uitsluitend de training-kaart en donkere premium-oppervlakken</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="eyebrow">Regels voor glasgebruik</div>
+      <p class="note">Nooit meer dan twee glas-containers direct op elkaar gestapeld, anders wordt de diepte optisch onleesbaar.</p>
+      <div class="code">/* Glas Licht */
+background: rgba(255,255,255,0.22–0.28)
+backdrop-filter: blur(20–28px)
+border: 0.5px solid rgba(255,255,255,0.45)
+border-radius: 20–28px</div>
+      <p class="note" style="margin-top:14px;">Border-radius is groter op elementen die de gebruiker aanraakt (knoppen, invoervelden: 28 tot 32px) dan op informatieve containers (20 tot 24px).</p>
+    </div>
+  </div>
+
+  <!-- 05 GRADIENTS -->
+  <div class="phase-header">
+    <span class="phase-num">05</span>
+    <span class="phase-title">Gradient-systeem</span>
+    <span class="phase-line"></span>
+  </div>
+  <p class="lead">Gradients lopen <strong>altijd van koud naar warm</strong>, van blauw naar oranje. Nooit omgekeerd. De richting symboliseert vooruitgang: van de koele ochtend naar het warme licht.</p>
+
+  <div class="grid g3">
+    <div class="grad-card">
+      <div class="grad-chip grad-heaven"></div>
+      <div class="grad-body">
+        <div class="grad-name">Gradient Hemel</div>
+        <div class="grad-angle">160deg · 5 stops</div>
+        <div class="grad-role">De basis ambient-gradient voor alle achtergronden. De Wuyah-lucht, altijd aanwezig als fundament, nooit statisch.</div>
+      </div>
+    </div>
+    <div class="grad-card">
+      <div class="grad-chip grad-power"></div>
+      <div class="grad-body">
+        <div class="grad-name">Gradient Kracht</div>
+        <div class="grad-angle">135deg · Sky Deep → Rose Deep → Orange Deep</div>
+        <div class="grad-role">Voor CTA-knoppen, progressie-accenten en mijlpalen. Het enige moment waarop alle drie de kleuren vol aanwezig zijn.</div>
+      </div>
+    </div>
+    <div class="grad-card">
+      <div class="grad-chip grad-identity"></div>
+      <div class="grad-body">
+        <div class="grad-name">Gradient Identiteit</div>
+        <div class="grad-angle">135deg · Sky Ink → Rose Deep</div>
+        <div class="grad-role">Uitsluitend voor het logo en display-titels op lichte achtergrond.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 / 07 BEWEGING -->
+  <div class="phase-header">
+    <span class="phase-num">06</span>
+    <span class="phase-title">Ambient beweging en motion</span>
+    <span class="phase-line"></span>
+  </div>
+  <p class="lead">De achtergrond achter deze pagina beweegt nu al: <strong>drie overlappende blur-orbs</strong> bewegen langzaam en asynchroon. Dit is de levende adem van de interface. Beweging informeert de gebruiker en laat hem iets voelen. Beweging die alleen decoratief is, hoort niet in Wuyah.</p>
+
+  <div class="grid g2">
+    <div class="card">
+      <div class="eyebrow">De Wuyah motion curve</div>
+      <p class="curve-code" style="margin:6px 0 18px;">cubic-bezier(0.34, 1.56, 0.64, 1)</p>
+      <div class="spring-box">
+        <div class="spring-dot"></div>
+      </div>
+      <p class="note" style="margin-top:18px;">De enige curve die een element net iets verder laat gaan dan verwacht en dan terugveert. Dit is het gevoel van een goed gebouwde mechanische schakelaar: precies het satisfying gevoel dat Wuyah nastreeft.</p>
+    </div>
+    <div class="card">
+      <div class="eyebrow">Grain-textuur</div>
+      <p class="note">Over de gehele achtergrond ligt een subtiele noise-textuur op opacity 0.025 tot 0.04. Dit voorkomt het digitale vlakke gevoel van pure gradients en geeft de interface een tastbaar, bijna fysiek oppervlak. Een Wuyah-signatuur die onderbewust bijdraagt aan het gevoel van premium kwaliteit.</p>
+      <hr class="hr-soft">
+      <div class="eyebrow">Drie ambient orbs</div>
+      <p class="note">Sky linksboven (520px), Rose midden-rechts (420px), Orange linksonder (360px). Elk met blur(80px) en een eigen vertraging, zodat ze nooit synchroon lopen.</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:18px;">
+    <div class="eyebrow" style="margin-bottom:18px;">Interactie-specificaties</div>
+    <table class="motion-table">
+      <thead><tr><th>Actie</th><th>Beweging</th><th>Duur</th></tr></thead>
+      <tbody>
+        <tr><td>Card hover</td><td><span class="mono">translateY(-3px) + scale(1.01)</span></td><td><span class="dur">250ms</span></td></tr>
+        <tr><td>Card press</td><td><span class="mono">scale(0.97 tot 0.98)</span></td><td><span class="dur">150ms</span></td></tr>
+        <tr><td>Button hover</td><td><span class="mono">scale(1.05 tot 1.08) + shadow</span></td><td><span class="dur">200ms</span></td></tr>
+        <tr><td>Button press</td><td><span class="mono">scale(0.93 tot 0.95)</span></td><td><span class="dur">120ms</span></td></tr>
+        <tr><td>Optie selecteren</td><td><span class="mono">translateX(4px) + achtergrond</span></td><td><span class="dur">220ms</span></td></tr>
+        <tr><td>Bericht verschijnen</td><td><span class="mono">translateY(10px) + opacity 0→1</span></td><td><span class="dur">500ms</span></td></tr>
+        <tr><td>Scherm-overgang</td><td><span class="mono">opacity + translateY(12px), staggered</span></td><td><span class="dur">400ms</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 08 ICONOGRAFIE -->
+  <div class="phase-header">
+    <span class="phase-num">08</span>
+    <span class="phase-title">Iconografie</span>
+    <span class="phase-line"></span>
+  </div>
+  <p class="lead">Wuyah heeft geen iconenbibliotheek. <strong>Elk icoon is origineel ontworpen</strong> als onderdeel van de Wuyah-beeldtaal. Externe libraries maken elk merk generiek. Iconen zijn opgebouwd uit lijnen, stroke-width 1.2 tot 1.5px met ronde uiteinden, en hebben een subtiele organische kwaliteit.</p>
+
+  <div class="card">
+    <div class="grid g3" style="gap:6px;">
+      <div class="icon-cell">
+        <div class="icon-art"><svg viewBox="0 0 40 40"><circle class="ic" cx="20" cy="20" r="4"/><circle class="ic" cx="9" cy="11" r="3"/><circle class="ic" cx="31" cy="11" r="3"/><circle class="ic" cx="9" cy="29" r="3"/><circle class="ic" cx="31" cy="29" r="3"/><line class="ic" x1="11.5" y1="13" x2="17" y2="17.5"/><line class="ic" x1="28.5" y1="13" x2="23" y2="17.5"/><line class="ic" x1="11.5" y1="27" x2="17" y2="22.5"/><line class="ic" x1="28.5" y1="27" x2="23" y2="22.5"/></svg></div>
+        <div><div class="icon-name">Mindprint</div><div class="icon-concept">Neuraal netwerk</div></div>
+      </div>
+      <div class="icon-cell">
+        <div class="icon-art"><svg viewBox="0 0 40 40"><path class="ic" d="M20 31 C8 22 8 12 14 11 C18 10.5 20 14 20 15 C20 14 22 10.5 26 11 C32 12 32 22 20 31 Z"/><line class="ic" x1="20" y1="17" x2="20" y2="23"/><line class="ic" x1="17" y1="20" x2="23" y2="20"/></svg></div>
+        <div><div class="icon-name">Growth</div><div class="icon-concept">Kracht door zelfzorg</div></div>
+      </div>
+      <div class="icon-cell">
+        <div class="icon-art"><svg viewBox="0 0 40 40"><path class="ic" d="M20 8 C24 14 27 16 27 23 C27 29 24 32 20 32 C16 32 13 29 13 23 C13 19 16 17 16 13 C18 15 20 16 20 8 Z"/></svg></div>
+        <div><div class="icon-name">Streak</div><div class="icon-concept">Vuur, ritme</div></div>
+      </div>
+      <div class="icon-cell">
+        <div class="icon-art"><svg viewBox="0 0 40 40"><circle class="ic" cx="20" cy="20" r="12"/><circle class="ic" cx="20" cy="20" r="1.6" fill="var(--sky-ink)"/><path class="ic" d="M20 12 L24 24 L20 20 L16 24 Z"/></svg></div>
+        <div><div class="icon-name">Direction</div><div class="icon-concept">Kompas, waarden</div></div>
+      </div>
+      <div class="icon-cell">
+        <div class="icon-art"><svg viewBox="0 0 40 40"><path class="ic" d="M7 17 C12 12 15 22 20 17 C25 12 28 22 33 17"/><path class="ic" d="M7 25 C12 20 15 30 20 25 C25 20 28 30 33 25" style="opacity:0.5"/></svg></div>
+        <div><div class="icon-name">Calm</div><div class="icon-concept">Golf, rust</div></div>
+      </div>
+      <div class="icon-cell">
+        <div class="icon-art"><svg viewBox="0 0 40 40"><circle class="ic" cx="20" cy="20" r="6"/><line class="ic" x1="20" y1="6" x2="20" y2="10"/><line class="ic" x1="20" y1="30" x2="20" y2="34"/><line class="ic" x1="6" y1="20" x2="10" y2="20"/><line class="ic" x1="30" y1="20" x2="34" y2="20"/><line class="ic" x1="10.5" y1="10.5" x2="13.3" y2="13.3"/><line class="ic" x1="26.7" y1="26.7" x2="29.5" y2="29.5"/><line class="ic" x1="29.5" y1="10.5" x2="26.7" y2="13.3"/><line class="ic" x1="13.3" y1="26.7" x2="10.5" y2="29.5"/></svg></div>
+        <div><div class="icon-name">Clarity</div><div class="icon-concept">Zon, focus</div></div>
+      </div>
+      <div class="icon-cell">
+        <div class="icon-art"><svg viewBox="0 0 40 40"><path class="ic" d="M5 29 L16 13 L23 23 L28 16 L35 29 Z"/></svg></div>
+        <div><div class="icon-name">Resilience</div><div class="icon-concept">Berg</div></div>
+      </div>
+      <div class="icon-cell">
+        <div class="icon-art"><svg viewBox="0 0 40 40"><path class="ic" d="M6 20 C12 12 28 12 34 20 C28 28 12 28 6 20 Z"/><circle class="ic" cx="20" cy="20" r="5"/><circle class="ic" cx="20" cy="20" r="1.6" fill="var(--sky-ink)"/></svg></div>
+        <div><div class="icon-name">Self</div><div class="icon-concept">Iris, oog</div></div>
+      </div>
+      <div class="icon-cell">
+        <div class="icon-art"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="15" fill="url(#sofiagrad)"/><path class="sofia-glief" d="M25 15 C25 12 16 11 15 16 C14 21 25 19 25 24 C25 29 15 28 14 25"/><defs><radialGradient id="sofiagrad" cx="35%" cy="30%"><stop offset="0%" stop-color="#8FBCE8"/><stop offset="50%" stop-color="#B59DDB"/><stop offset="100%" stop-color="#EF7FA4"/></radialGradient></defs></svg></div>
+        <div><div class="icon-name">Sofia</div><div class="icon-concept">Letterglief S</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 09 COMPONENTEN -->
+  <div class="phase-header">
+    <span class="phase-num">09</span>
+    <span class="phase-title">Componentbibliotheek</span>
+    <span class="phase-line"></span>
+  </div>
+  <p class="lead">Werkende componenten. Beweeg over de knoppen om de motion curve te voelen. De primaire gradient-knop is de krachtigste in het systeem en mag <strong>maximaal één keer per scherm</strong> voorkomen.</p>
+
+  <div class="grid g2">
+    <div class="card">
+      <div class="eyebrow" style="margin-bottom:18px;">Knoppen</div>
+      <div class="btn-row">
+        <button class="btn-primary">Start je sessie</button>
+        <button class="btn-secondary">Misschien later</button>
+      </div>
+      <div style="margin-top:20px; padding:18px; border-radius:18px; background:rgba(13,31,60,0.72);">
+        <button class="btn-dark">In de training-kaart</button>
+      </div>
+      <hr class="hr-soft">
+      <div class="eyebrow" style="margin-bottom:12px;">Invoerveld</div>
+      <input class="input-field" type="text" placeholder="Waar denk je vandaag aan?">
+    </div>
+
+    <div class="training-card">
+      <div class="rg rg1"></div><div class="rg rg2"></div><div class="rg rg3"></div>
+      <div class="tc-content">
+        <div class="tc-eyebrow">Training van vandaag</div>
+        <div class="tc-title">Waar je aandacht gaat</div>
+        <div class="tc-sub">Je aandacht beïnvloedt je emotionele staat meer dan de meeste mensen beseffen. Vijf minuten.</div>
+        <button class="btn-dark">Begin nu</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid g2" style="margin-top:18px;">
+    <div class="card">
+      <div class="eyebrow" style="margin-bottom:16px;">Sofia-bubble</div>
+      <div class="sofia-bubble">Je bent terug. Dat is het enige wat telt.</div>
+      <p class="note" style="margin-top:14px;">De asymmetrische radius (20px 20px 20px 5px) onderscheidt een bericht van een kaart.</p>
+    </div>
+    <div class="card">
+      <div class="eyebrow" style="margin-bottom:16px;">Streak-bars</div>
+      <div class="streak-row">
+        <div class="bar bar-done" style="height:32px;"></div>
+        <div class="bar bar-done" style="height:44px;"></div>
+        <div class="bar bar-miss" style="height:20px;"></div>
+        <div class="bar bar-done" style="height:40px;"></div>
+        <div class="bar bar-done" style="height:52px;"></div>
+        <div class="bar bar-done" style="height:46px;"></div>
+        <div class="bar bar-today" style="height:58px;"></div>
+      </div>
+      <p class="note" style="margin-top:14px;">Voltooid in Sky, vandaag in Rose naar Orange met pulserende shadow, gemist in een rustige lege staat. Geen verliesframing.</p>
+    </div>
+  </div>
+
+  <!-- 10 SOFIA -->
+  <div class="phase-header">
+    <span class="phase-num">10</span>
+    <span class="phase-title">Sofia's aanwezigheid</span>
+    <span class="phase-line"></span>
+  </div>
+  <p class="lead">Sofia is de emotionele kern van Wuyah. Haar visuele aanwezigheid draagt die lading: een eigen visuele taal, <strong>geen foto en geen illustratie</strong>.</p>
+
+  <div class="card-deep" style="padding:32px;">
+    <div class="sofia-stage">
+      <div class="sofia-avatar-wrap">
+        <div class="sofia-ring"></div>
+        <div class="sofia-avatar">
+          <svg viewBox="0 0 44 44"><path class="sofia-glief" d="M29 16 C29 12 18 11 17 17 C16 23 29 21 29 27 C29 33 17 32 16 28"/></svg>
+        </div>
+        <div class="sofia-status"></div>
+      </div>
+      <div style="flex:1; min-width:220px;">
+        <p class="note" style="color:var(--ink-mid);"><strong style="color:var(--ink)">Avatar:</strong> spherisch vlak met radiale gradient van Sky Mid via lavendel naar Rose Deep, met een handmatig getekende S-glief. <strong style="color:var(--ink)">Ring:</strong> conic-gradient die langzaam roteert (6s), signaleert continue aanwezigheid en intelligentie. <strong style="color:var(--ink)">Status:</strong> pulserende groene dot, periode 3s, betekent aanwezig en niet bezig. Sofia's berichten komen nooit tegelijk, altijd gestagd met 250 tot 300ms.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 12 LEGE STAAT / LAADSCHERM -->
+  <div class="phase-header">
+    <span class="phase-num">12</span>
+    <span class="phase-title">Lege staat en laadscherm</span>
+    <span class="phase-line"></span>
+  </div>
+  <p class="lead">De lege staat is geen fout, maar een uitnodiging: het meest open en rustige scherm van de app. Het laadscherm communiceert geen wachttijd, alleen aanwezigheid.</p>
+
+  <div class="grid g2">
+    <div class="card empty-state">
+      <div class="sunrise-symbol">
+        <svg viewBox="0 0 84 84">
+          <defs><linearGradient id="sunrise" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#5A9AD4"/><stop offset="55%" stop-color="#EF7FA4"/><stop offset="100%" stop-color="#F4A040"/></linearGradient></defs>
+          <line x1="14" y1="60" x2="70" y2="60" stroke="url(#sunrise)" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M24 60 A18 18 0 0 1 60 60" fill="none" stroke="url(#sunrise)" stroke-width="2.4" stroke-linecap="round"/>
+          <line x1="42" y1="20" x2="42" y2="30" stroke="url(#sunrise)" stroke-width="2.4" stroke-linecap="round"/>
+          <line x1="22" y1="28" x2="28" y2="34" stroke="url(#sunrise)" stroke-width="2.4" stroke-linecap="round"/>
+          <line x1="62" y1="28" x2="56" y2="34" stroke="url(#sunrise)" stroke-width="2.4" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="empty-title">Een rustige start</div>
+      <div class="empty-sub">Er is nog niets om te tonen. Dat is precies goed. Begin wanneer je er klaar voor bent.</div>
+      <button class="btn-primary">Eerste sessie</button>
+    </div>
+    <div class="card loading-state" style="display:flex; flex-direction:column; justify-content:center;">
+      <div class="load-orbs">
+        <div class="load-orb lo1"></div>
+        <div class="load-orb lo2"></div>
+        <div class="load-orb lo3"></div>
+      </div>
+      <div class="load-text">Sofia is with you</div>
+      <p class="note" style="margin-top:18px;">Geen laadbalk. Geen percentage. Geen wachttijd-communicatie. De kleurenopeenvolging loopt altijd koud naar warm.</p>
+    </div>
+  </div>
+
+  <!-- 13 NOTIFICATIES -->
+  <div class="phase-header">
+    <span class="phase-num">13</span>
+    <span class="phase-title">Notificatie-esthetiek</span>
+    <span class="phase-line"></span>
+  </div>
+  <p class="lead">Push-notificaties zijn de stem van Wuyah buiten de app. <strong>Altijd menselijk, nooit urgent.</strong> Nooit een uitroepteken, nooit een streak-teller als motivatiemiddel.</p>
+
+  <div class="grid g2">
+    <div class="card">
+      <div class="dd-h dd-do" style="color:#2E9E63; margin-bottom:14px;">Zo wel</div>
+      <div class="grid" style="gap:12px;">
+        <div class="notif">
+          <div class="notif-icon"><svg viewBox="0 0 20 20"><path class="sofia-glief" style="stroke-width:1.3" d="M13.5 7 C13.5 5 8.5 4.5 8 7.5 C7.5 10.5 13.5 9.5 13.5 12.5 C13.5 15 8 14.5 7.5 12.5"/></svg></div>
+          <div class="notif-body"><div class="nh">Wuyah</div><div class="nt">Een paar stille minuten telt vandaag ook.</div></div>
+        </div>
+        <div class="notif">
+          <div class="notif-icon"><svg viewBox="0 0 20 20"><path class="sofia-glief" style="stroke-width:1.3" d="M13.5 7 C13.5 5 8.5 4.5 8 7.5 C7.5 10.5 13.5 9.5 13.5 12.5 C13.5 15 8 14.5 7.5 12.5"/></svg></div>
+          <div class="notif-body"><div class="nh">Wuyah</div><div class="nt">Dag 18. Sofia ziet het verschil.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="dd-h" style="color:var(--ink-muted); margin-bottom:14px;">Zo nooit</div>
+      <div class="grid" style="gap:12px;">
+        <div class="notif notif-bad">
+          <div class="notif-icon" style="background:#F44040;"></div>
+          <div class="notif-body"><div class="nh">Wuyah</div><div class="nt">Je verliest je streak van 17 dagen!</div></div>
+        </div>
+        <div class="notif notif-bad">
+          <div class="notif-icon" style="background:#F44040;"></div>
+          <div class="notif-body"><div class="nh">Wuyah</div><div class="nt">Laatste kans vandaag, kom snel terug!!</div></div>
+        </div>
+      </div>
+      <p class="note" style="margin-top:14px;">Nooit urgentie, verliesframing, streakcounters of uitroeptekens.</p>
+    </div>
+  </div>
+
+  <!-- 14 FOTOGRAFIE -->
+  <div class="phase-header">
+    <span class="phase-num">14</span>
+    <span class="phase-title">Fotografie en imagery</span>
+    <span class="phase-line"></span>
+  </div>
+  <p class="lead">Wuyah gebruikt <strong>geen stockfoto's, geen yogaposes, geen geforceerde glimlachen</strong>. Mensen worden gefotografeerd in rustige, herkenbare dagelijkse situaties. Ochtendlicht, een kop koffie, iemand die naar buiten kijkt.</p>
+
+  <div class="grid g3">
+    <div class="card">
+      <div class="eyebrow">Mensen</div>
+      <p class="note">Geen pose, geen performance. Rustige dagelijkse momenten in ochtendlicht.</p>
+    </div>
+    <div class="card">
+      <div class="eyebrow">Kleurbehandeling</div>
+      <p class="note">Subtiele warm-cool split-toning: schaduwen iets blauwer (Sky), lichten iets warmer (Peach en Orange). Dit verbindt fotografie met het kleurensysteem zonder het kunstmatig te maken.</p>
+    </div>
+    <div class="card">
+      <div class="eyebrow">Abstracte imagery</div>
+      <p class="note">Als er geen mensen zijn: atmosferisch. Wolken van onderaf, ochtendlicht door een raam, wateroppervlak. Alles wat licht, diepte en rust communiceert.</p>
+    </div>
+  </div>
+
+  <!-- 15 NOVA -->
+  <div class="phase-header">
+    <span class="phase-num">15</span>
+    <span class="phase-title">Nova-validatie</span>
+    <span class="phase-line"></span>
+  </div>
+  <p class="lead">Nova heeft Luna's ontwerpsysteem getoetst op productambitie. Wat past, wat is versterkt en wat is aangescherpt.</p>
+
+  <div class="dd">
+    <div class="dd-col dd-do">
+      <div class="dd-h">Goedgekeurd en versterkt</div>
+      <ul class="dd-list">
+        <li>Glasmorfisme creëert een interface die licht aanvoelt, essentieel voor dagelijks terugkeergedrag.</li>
+        <li>Poppins is snel leesbaar in sessies van 3 tot 7 minuten en communiceert tegelijk premium karakter.</li>
+        <li>De spring-curve versterkt de gewoonte-loop. Elke succesvolle interactie voelt als een kleine beloning.</li>
+        <li>De ambient achtergrond is goedgekeurd, mits leesbaarheid altijd wint bij conflict.</li>
+      </ul>
+    </div>
+    <div class="dd-col dd-no">
+      <div class="dd-h">Aangescherpt door Nova</div>
+      <ul class="dd-list">
+        <li>Twee expliciete registers nodig: kalm bij dagelijks gebruik, krachtig bij progressie. Het eerste ontwerp was te uniform kalm.</li>
+        <li>De gradient-knop mag maximaal één keer per scherm voorkomen, anders verliest hij zijn kracht.</li>
+        <li>De donkere training-kaart is het premium hart van de app en wordt met extra zorgvuldigheid behandeld.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 16 NOOIT -->
+  <div class="phase-header">
+    <span class="phase-num">16</span>
+    <span class="phase-title">Wat Wuyah nooit doet</span>
+    <span class="phase-line"></span>
+  </div>
+  <p class="lead">Absolute grenzen. Geen enkel ontwerp, geen enkele campagne, geen enkele iteratie overschrijdt deze.</p>
+
+  <div class="grid g3">
+    <div class="dd-col dd-no">
+      <div class="dd-h">Visueel</div>
+      <ul class="dd-list">
+        <li>Geen gradient direct achter tekst zonder WCAG AA contrast</li>
+        <li>Geen drie of meer glaslagen gestapeld</li>
+        <li>Geen loading-bars, percentages of countdown-timers</li>
+        <li>Geen dark-pattern elementen of rode streakcounters</li>
+        <li>Geen stock-wellness-fotografie</li>
+        <li>Geen externe icon-libraries of andere fonts dan Poppins</li>
+      </ul>
+    </div>
+    <div class="dd-col dd-no">
+      <div class="dd-h">Beweging</div>
+      <ul class="dd-list">
+        <li>Geen animaties boven 600ms voor functionele UI</li>
+        <li>Geen flikkerende of stroboscopische effecten</li>
+        <li>Geen agressieve gamification zoals confetti of score-popups</li>
+        <li>Geen beweging die aandacht eist terwijl de gebruiker leest</li>
+      </ul>
+    </div>
+    <div class="dd-col dd-no">
+      <div class="dd-h">Kleur</div>
+      <ul class="dd-list">
+        <li>Gradient nooit van warm naar koud</li>
+        <li>Rose Deep en Orange Deep nooit gelijkwaardig dominant op één oppervlak</li>
+        <li>Rood uitsluitend voor fout-states, nooit als design-kleur</li>
+        <li>Zwart bestaat niet. Ink (#0D1F3C) is het diepste.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 17 FILTER -->
+  <div class="phase-header">
+    <span class="phase-num">17</span>
+    <span class="phase-title">Designbeslissings-filter</span>
+    <span class="phase-line"></span>
+  </div>
+  <p class="lead">Elke nieuwe designbeslissing wordt getoetst aan vijf vragen. Is het antwoord op een van de eerste vier nee, dan wordt het ontwerp herzien.</p>
+
+  <div class="card-deep" style="padding:30px;">
+    <div class="filter-step"><div class="filter-num">1</div><div class="filter-q">Voelt dit kalm genoeg voor dagelijks gebruik?</div></div>
+    <div class="filter-step"><div class="filter-num">2</div><div class="filter-q">Is dit premium genoeg voor een wereldklasse merk?</div></div>
+    <div class="filter-step"><div class="filter-num">3</div><div class="filter-q">Versterkt dit het gevoel van mentale vooruitgang?</div></div>
+    <div class="filter-step"><div class="filter-num">4</div><div class="filter-q">Past dit bij de Poppins-glasmorfisme-sunrise-taal van Wuyah?</div></div>
+    <div class="filter-step"><div class="filter-num">5</div><div class="filter-q">Zou Apple, Nike of OpenAI trots zijn op dit detailniveau?</div></div>
+    <div class="filter-final">
+      <p class="y"><strong>Vraag 5 is ja:</strong> het ontwerp is klaar.</p>
+      <p style="margin-top:6px;"><strong>Vraag 5 is nee:</strong> het niveau is nog niet hoog genoeg. Ga terug.</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="fw">Wuyah</div>
+    <p class="fm">Brand Design v1.0 · Mei 2026 · Luna (Art Direction) en Nova (Product Architecture)<br>Dit document is het fundament. Elk volgend ontwerp wordt hieraan gemeten. Afwijkingen zijn toegestaan als ze dit document verbeteren, en worden dan in de volgende versie opgenomen.<br>wuyah.com</p>
+  </footer>
+
+</div>
+</div>
+
+</body>
+</html>
